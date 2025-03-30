@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Memory Mania</title>
+    <link rel="stylesheet" href="styles.css"> 
+</head>
+<body>
+
+    <img src="catcar.png" alt="Левое изображение" class="floating-image left"> <!-- Левое изображение -->
+    <img src="catplane.png" alt="Правое изображение" class="floating-image right"> <!-- Правое изображение -->
+
+    <h1>Memory Mania</h1>
+    <div>
+        <button class="button" onclick="startGame()">Играть</button>
+    </div>
+
+    <div>
+        <button class="button" onclick="showRules()">Правила игры</button>
+    </div>
+
+    <script>
+        function startGame() {
+            window.location.href = "gamePage.html"; // Убедитесь, что путь правильный
+        }
+
+        function showRules() {
+            window.location.href = "rule.html"; // Убедитесь, что путь правильный
+        }
+    </script>
+
+</body>
+</html>

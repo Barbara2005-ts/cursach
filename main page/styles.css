@@ -1,0 +1,92 @@
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #beaec1;
+    font-family: Arial, sans-serif;
+    
+}
+
+h1 {
+    margin-bottom: 100px;
+    font-size: 89px;
+    color: #312134; /* Основной цвет текста */
+    text-align: center; /* Центрирование заголовка */
+    text-transform: uppercase; /* Преобразование текста в верхний регистр */
+    letter-spacing: 3px; /* Увеличение расстояния между буквами */
+    font-family: 'Arial Black', sans-serif; /* Изменение шрифта на более жирный */
+    text-shadow: none; /* Убрана тень для большей четкости */
+    position: relative; /* Для обводки */
+}
+
+h1::before {
+    content: attr(data-text); /* Дублирование текста для обводки */
+    position: absolute;
+    left: 0;
+    top: 0;
+    color: #312134; /* Цвет обводки */
+    z-index: -1; /* Помещение обводки под текст */
+    filter: blur(2px); /* Небольшое размытие для обводки */
+}
+
+.button-container {
+    display: flex;
+    flex-direction: column; /* Вертикальное расположение кнопок */
+    align-items: center; /* Центрирование кнопок по горизонтали */
+}
+
+.button {
+    padding: 20px 40px; /* Увеличенные отступы для кнопок */
+    margin: 20px 0; /* Отступ между кнопками */
+    font-size: 24px; /* Увеличенный размер шрифта */
+    color: #312134; /* Цвет текста */
+    background-color: #af8db6; /* Цвет фона кнопки */
+    border: none;
+    border-radius: 10px; /* Закругленные углы */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Тень для кнопок */
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s; /* Плавный переход для фона и трансформации */
+    position: relative; /* Для обводки */
+    text-transform: uppercase; /* Преобразование текста в верхний регистр */
+    letter-spacing: 2px; /* Увеличение расстояния между буквами */
+}
+
+.button::before {
+    content: attr(data-text); /* Дублирование текста для обводки */
+    position: absolute;
+    left: 0;
+    top: 0;
+    color: #312134; /* Цвет обводки */
+    z-index: -1; /* Помещение обводки под текст */
+    filter: blur(2px); /* Небольшое размытие для обводки */
+}
+
+.button:hover {
+    background-color: #ccb7d0; /* Цвет фона при наведении */
+    transform: translateY(-2px); /* Легкий подъем кнопки при наведении */
+}
+
+.button:active {
+    transform: translateY(0); /* Возврат кнопки в исходное положение при нажатии */
+}
+
+.floating-image {
+    position: absolute; /* Позиционирование изображений */
+    width: 200px; /* Ширина изображений */
+    height: auto; /* Автоматическая высота для сохранения пропорций */
+}
+
+.left {
+    left: 10px; /* Отступ от левого края */
+    top: 50%; /* Центрирование по вертикали */
+    transform: translateY(-50%); /* Центрирование по вертикали */
+}
+
+.right {
+    right: 10px; /* Отступ от правого края */
+    top: 50%; /* Центрирование по вертикали */
+    transform: translateY(-50%); /* Центрирование по вертикали */
+}
