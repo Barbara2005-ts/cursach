@@ -1,4 +1,4 @@
-const colors = ['#800df2', '#f20dde', 'blue', 'yellow', 'orange', 'purple', 'pink', 'cyan'];
+const colors = ['#800df2', '#f20dde', '#0d6cf2', '#ffcc00', '#ff5900', '#0a4400', '#6b3700', 'cyan'];
 let sequence = [];
 let playerSequence = [];
 let level = 0;
@@ -16,7 +16,7 @@ function startGame() {
     messageDiv.textContent = '';
     buttonContainer.innerHTML = ''; // Очищаем контейнер для кнопок
     startButton.style.display = 'none'; // Скрываем кнопку "Начать игру"
-    createColorButtons(); // Создаём кнопки для цветов
+    createColorButtons(colors); // Создаём кнопки для цветов
     nextLevel();
 }
 
