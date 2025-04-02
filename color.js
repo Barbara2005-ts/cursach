@@ -1,4 +1,4 @@
-const colors = ['red', 'green', 'blue', 'yellow', 'orange', 'purple', 'pink', 'cyan'];
+const colors = ['#800df2', '#f20dde', 'blue', 'yellow', 'orange', 'purple', 'pink', 'cyan'];
 let sequence = [];
 let playerSequence = [];
 let level = 0;
@@ -25,10 +25,22 @@ function createColorButtons() {
         const button = document.createElement('button');
         button.className = 'color-button';
         button.style.backgroundColor = color;
-        button.addEventListener('click', () => handleColorClick(color));
+
+        // Обработчик события для нажатия на кнопку
+        button.addEventListener('click', () => {
+            button.classList.add('active'); // Добавляем класс для подсветки
+
+            // Убираем класс через 300 мс
+            setTimeout(() => {
+                button.classList.remove('active');
+            }, 300);
+
+            handleColorClick(color); // Обрабатываем клик
+        });
+
         buttonContainer.appendChild(button);
     });
-    buttonContainer.style.display = 'flex'; // Показываем контейнер с кнопками
+    buttonContainer.style.display = 'grid'; // Используем grid для отображения кнопок
 }
 
 function nextLevel() {

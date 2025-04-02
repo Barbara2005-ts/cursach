@@ -4,7 +4,7 @@ body {
     align-items: center;
     justify-content: center;
     height: 100vh;
-    background-color: #beaec1;
+    background-color: #e6e6e6;
 }
 
 #colors {
@@ -38,4 +38,98 @@ body {
 }
 .color-button.visible {
     opacity: 1;
+}
+h1 {
+    margin-bottom: 100px;
+    font-size: 50px;
+    color: #312134;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    font-family: 'Arial Black', sans-serif;
+    text-shadow: none;
+    position: relative;
+}
+
+.button {
+    padding: 20px 40px;
+    margin: 20px 0;
+    font-size: 24px;
+    color: #312134;
+    background-color: #af8db6;
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+    position: relative;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    display: inline;
+}
+.button::before {
+    content: attr(data-text); /* Дублирование текста для обводки */
+    position: absolute;
+    left: 0;
+    top: 0;
+    color: #312134; /* Цвет обводки */
+    z-index: -1; /* Помещение обводки под текст */
+    filter: blur(2px); /* Небольшое размытие для обводки */
+}
+
+.button:hover {
+    background-color: #ccb7d0; /* Цвет фона при наведении */
+    transform: translateY(-2px); /* Легкий подъем кнопки при наведении */
+}
+
+.button:active {
+    transform: translateY(0); /* Возврат кнопки в исходное положение при нажатии */
+}
+#message {
+    margin-bottom: 100px;
+    font-size: 20px;
+    color: #312134;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    font-family: 'Arial Black', sans-serif;
+    text-shadow: none;
+    position: relative;
+    font-style: italic;
+}
+.color-button {
+    width: 100px; /* Ширина кнопки */
+    height: 100px; /* Высота кнопки */
+    margin: 10px; /* Отступы между кнопками */
+    border: none; /* Убираем рамку */
+    cursor: pointer; /* Курсор при наведении */
+    transition: transform 0.2s, opacity 0.2s; /* Плавный переход */
+}
+
+.color-button.active {
+    opacity: 0.7; /* Уменьшаем непрозрачность */
+    transform: scale(1.1); /* Увеличиваем кнопку */
+}
+
+#buttonContainer {
+    display: grid; /* Используем grid для расположения кнопок */
+    grid-template-columns: repeat(4, 1fr); /* 4 колонки */
+    gap: 10px; /* Промежуток между кнопками */
+    padding: 20px; /* Отступы внутри контейнера */
+    
+}
+
+.color-button {
+    width: 100px; /* Ширина кнопки */
+    height: 100px; /* Высота кнопки */
+    border: none; /* Убираем рамку */
+    cursor: pointer; /* Курсор при наведении */
+    transition: transform 0.2s, opacity 0.2s; /* Плавный переход */
+    border: 5px solid #312134;
+    border-radius: 100px;
+}
+
+.color-button.active {
+    opacity: 0.7; /* Уменьшаем непрозрачность */
+    transform: scale(1.1); /* Увеличиваем кнопку */
 }
