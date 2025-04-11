@@ -1,98 +1,133 @@
-const colors = ['#800df2', '#f20dde', '#0d6cf2', '#ffcc00', '#ff5900', '#0a4400', '#6b3700', 'cyan'];
+const colors = ['red', 'blue', 'green', 'yellow', 'purple', 'orange'];
 let sequence = [];
 let playerSequence = [];
-let level = 0;
+let level = 1;
+let score = 0;
+let gameStarted = false;
+let acceptingInput = false;
 
-const colorsDiv = document.getElementById('colors');
-const startButton = document.getElementById('startButton');
-const messageDiv = document.getElementById('message');
-const buttonContainer = document.getElementById('buttonContainer');
+const startBtn = document.getElementById('startBtn');
+const nextLevelBtn = document.getElementById('nextLevelBtn');
+const levelDisplay = document.getElementById('level');
+const scoreDisplay = document.getElementById('score');
+const messageEl = document.getElementById('message');
 
-startButton.addEventListener('click', startGame);
+// Блокируем кнопки при загрузке
+colors.forEach(color => {
+    const btn = document.getElementById(color);
+    btn.classList.add('disabled-btn');
+    btn.addEventListener('click', () => handleColorClick(color));
+});
+
+startBtn.addEventListener('click', startGame);
+nextLevelBtn.addEventListener('click', nextLevel);
 
 function startGame() {
-    level = 0;
+    gameStarted = true;
     sequence = [];
-    messageDiv.textContent = '';
-    buttonContainer.innerHTML = ''; // Очищаем контейнер для кнопок
-    startButton.style.display = 'none'; // Скрываем кнопку "Начать игру"
-    createColorButtons(colors); // Создаём кнопки для цветов
-    nextLevel();
+    playerSequence = [];
+    level = 1;
+    score = 0;
+    
+    messageEl.classList.add('hidden');
+    nextLevelBtn.classList.add('hidden');
+    updateDisplay();
+    startBtn.classList.add('hidden');
+    
+    addToSequence();
+    playSequence();
 }
 
-function createColorButtons() {
+function blockButtons() {
     colors.forEach(color => {
-        const button = document.createElement('button');
-        button.className = 'color-button';
-        button.style.backgroundColor = color;
-
-        // Обработчик события для нажатия на кнопку
-        button.addEventListener('click', () => {
-            button.classList.add('active'); // Добавляем класс для подсветки
-
-            // Убираем класс через 300 мс
-            setTimeout(() => {
-                button.classList.remove('active');
-            }, 300);
-
-            handleColorClick(color); // Обрабатываем клик
-        });
-
-        buttonContainer.appendChild(button);
+        document.getElementById(color).classList.add('disabled-btn');
     });
-    buttonContainer.style.display = 'grid'; // Используем grid для отображения кнопок
+}
+
+function unblockButtons() {
+    colors.forEach(color => {
+        document.getElementById(color).classList.remove('disabled-btn');
+    });
 }
 
 function nextLevel() {
     level++;
     playerSequence = [];
-    sequence.push(colors[Math.floor(Math.random() * colors.length)]);
-    showSequence();
+    acceptingInput = false;
+    nextLevelBtn.classList.add('hidden');
+    blockButtons();
+    
+    updateDisplay();
+    addToSequence();
+    playSequence();
 }
 
-function showSequence() {
-    messageDiv.textContent = ''; // Очищаем сообщение
-    let index = 0;
+function addToSequence() {
+    const randomColor = colors[Math.floor(Math.random() * colors.length)];
+    sequence.push(randomColor);
+}
+
+function playSequence() {
+    acceptingInput = false;
+    blockButtons();
+    
+    let i = 0;
     const interval = setInterval(() => {
-        if (index < sequence.length) {
-            const color = sequence[index];
-            const button = Array.from(buttonContainer.children).find(btn => btn.style.backgroundColor === color);
-            button.classList.add('visible'); // Подсвечиваем кнопку
-
-            setTimeout(() => {
-                button.classList.remove('visible'); // Убираем подсветку
-            }, 500);
-
-            index++;
-        } else {
+        if (i >= sequence.length) {
             clearInterval(interval);
             setTimeout(() => {
-                askForInput();
-            }, 1000);
+                unblockButtons();
+                acceptingInput = true;
+            }, 500);
+            return;
         }
-    }, 1000);
+        
+        const color = sequence[i];
+        highlightButton(color);
+        i++;
+    }, 800);
 }
 
-function askForInput() {
-    messageDiv.textContent = 'Нажмите цвета в правильной последовательности:';
+function highlightButton(color) {
+    const btn = document.getElementById(color);
+    btn.classList.add('highlight');
+    
+    setTimeout(() => {
+        btn.classList.remove('highlight');
+    }, 400);
 }
 
 function handleColorClick(color) {
+    if (!gameStarted || !acceptingInput) return;
+    
+    highlightButton(color);
     playerSequence.push(color);
-    const currentIndex = playerSequence.length - 1;
-
-    if (playerSequence[currentIndex] === sequence[currentIndex]) {
-        if (playerSequence.length === sequence.length) {
-            checkSequence();
-        }
-    } else {
-        messageDiv.textContent = 'Неправильно! Игра окончена. Нажмите "Начать игру", чтобы попробовать снова.';
-        buttonContainer.style.display = 'none'; // Скрываем кнопки
-        startButton.style.display = 'inline'; // Показываем кнопку "Начать игру"
+    
+    if (playerSequence[playerSequence.length - 1] !== sequence[playerSequence.length - 1]) {
+        gameOver();
+        return;
+    }
+    
+    if (playerSequence.length === sequence.length) {
+        score += level * 15;
+        updateDisplay();
+        acceptingInput = false;
+        blockButtons();
+        nextLevelBtn.classList.remove('hidden');
     }
 }
 
-function checkSequence() {
-    messageDiv.textContent = 'Правильно! Переходите к следующему уровню.';
-    setTimeout(nextLevel, 2000);
+function updateDisplay() {
+    levelDisplay.textContent = level;
+    scoreDisplay.textContent = score;
+}
+
+function gameOver() {
+    messageEl.textContent = `Игра окончена! Уровень: ${level}, Очки: ${score}`;
+    messageEl.classList.remove('hidden');
+    gameStarted = false;
+    acceptingInput = false;
+    blockButtons();
+    startBtn.classList.remove('hidden');
+    startBtn.textContent = 'Начать заново';
 }

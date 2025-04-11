@@ -3,17 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Игра на развитие памяти</title>
-    <link rel="stylesheet" href="color.css"> <!-- Подключение CSS файла -->
+    <title>Саймон говорит</title>
+    <link rel="stylesheet" href="color.css">
 </head>
 <body>
-    <h1>Запомни последовательность цветов!</h1>
-    <div id="colors"></div>
-    <div id="message"></div>
-    
-    <!-- Контейнер для кнопок -->
-    <div id="buttonContainer" style="display: none;"></div>
-    <button id="startButton" class="button">Начать игру</button> <!-- Кнопка видима по умолчанию -->
+    <div class="game-container">
+        <h1>Запомни последовательность</h1>
+        <div class="circle-container">
+            <button id="red" class="color-btn"></button>
+            <button id="blue" class="color-btn"></button>
+            <button id="green" class="color-btn"></button>
+            <button id="yellow" class="color-btn"></button>
+            <button id="purple" class="color-btn"></button>
+            <button id="orange" class="color-btn"></button>
+            <div class="center-circle">
+                <div class="game-info">
+                    <div>Уровень: <span id="level">1</span></div>
+                    <div>Очки: <span id="score">0</span></div>
+                </div>
+                <div id="message" class="message hidden"></div>
+                <div class="controls">
+                    <button id="startBtn">Старт</button>
+                    <button id="nextLevelBtn" class="hidden">Следующий уровень</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <script src="color.js"></script>
 </body>

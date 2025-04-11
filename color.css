@@ -1,135 +1,173 @@
 body {
+    font-family: Arial, sans-serif;
     display: flex;
-    flex-direction: column;
-    align-items: center;
     justify-content: center;
+    align-items: center;
     height: 100vh;
+    margin: 0;
     background-color: #e6e6e6;
 }
 
-#colors {
-    display: flex;
-    margin-bottom: 20px;
+.game-container {
+    text-align: center;
+    width: 100%;
+    max-width: 700px;
 }
 
-.color-box {
-    width: 100px;
-    height: 100px;
-    margin: 5px;
-    opacity: 0.5;
-    transition: opacity 0.5s;
+h1 {
+    margin-bottom: 100px;
+    font-size: 89px;
+    color: #312134; /* Основной цвет текста */
+    text-align: center; /* Центрирование заголовка */
+    text-transform: uppercase; /* Преобразование текста в верхний регистр */
+    letter-spacing: 3px; /* Увеличение расстояния между буквами */
+    font-family: 'Arial Black', sans-serif; /* Изменение шрифта на более жирный */
+    text-shadow: none; /* Убрана тень для большей четкости */
+    position: relative; /* Для обводки */
+}
+
+.circle-container {
+    position: relative;
+    width: 600px;
+    height: 600px;
+    margin: 0 auto;
+}
+
+.color-btn {
+    position: absolute;
+    width: 160px;
+    height: 160px;
+    
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.3s;
+    transform-origin: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+
+#red {
+    top: 70px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #ff5252;
+}
+
+#blue {
+    top: 150px;
+    right: 100px;
+    background-color: #4285f4;
+}
+
+#green {
+    bottom: 150px;
+    right: 100px;
+    background-color: #0f9d58;
+}
+
+#yellow {
+    bottom: 70px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #ffeb3b;
+}
+
+#purple {
+    bottom: 150px;
+    left: 100px;
+    background-color: #aa00ff;
+}
+
+#orange {
+    top: 150px;
+    left: 100px;
+    background-color: #ff6d00;
+}
+
+
+.center-circle {
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    background: white;
+    border-radius: 50%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 7px solid #333;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.game-info {
+    font-size: 1.3em;
+    margin-bottom: 15px;
+    text-align: center;
+    font-weight: bold;
+    width: 100%;
+}
+
+.message {
+    font-size: 1em;
+    color: #d32f2f;
+    font-weight: bold;
+    margin-bottom: 15px;
+    min-height: 20px;
+    text-align: center;
+    width: 100%;
 }
 
 .hidden {
-    opacity: 0.5;
+    display: none;
 }
 
-.visible {
-    opacity: 1;
+.controls {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 100%;
+    align-items: center;
 }
 
-.color-button {
-    width: 100px;
-    height: 100px;
-    margin: 10px;
+button {
+    padding: 12px 24px;
+    font-size: 1.1em;
+    color: white;
+    background-color: #6200ea;
     border: none;
+    border-radius: 30px;
     cursor: pointer;
-    opacity: 0.5;
-}
-.color-button.visible {
-    opacity: 1;
-}
-h1 {
-    margin-bottom: 100px;
-    font-size: 50px;
-    color: #312134;
-    text-align: center;
-    text-transform: uppercase;
-    letter-spacing: 3px;
-    font-family: 'Arial Black', sans-serif;
-    text-shadow: none;
-    position: relative;
+    transition: all 0.3s;
+    width: 80%;
+    max-width: 200px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-.button {
-    padding: 20px 40px;
-    margin: 20px 0;
-    font-size: 24px;
-    color: #312134;
-    background-color: #af8db6;
-    border: none;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-    cursor: pointer;
-    transition: background-color 0.3s, transform 0.2s;
-    position: relative;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    display: inline;
-}
-.button::before {
-    content: attr(data-text); /* Дублирование текста для обводки */
-    position: absolute;
-    left: 0;
-    top: 0;
-    color: #312134; /* Цвет обводки */
-    z-index: -1; /* Помещение обводки под текст */
-    filter: blur(2px); /* Небольшое размытие для обводки */
+button:hover {
+    background-color: #3700b3;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
 }
 
-.button:hover {
-    background-color: #ccb7d0; /* Цвет фона при наведении */
-    transform: translateY(-2px); /* Легкий подъем кнопки при наведении */
+#nextLevelBtn {
+    background-color: #0f9d58;
 }
 
-.button:active {
-    transform: translateY(0); /* Возврат кнопки в исходное положение при нажатии */
-}
-#message {
-    margin-bottom: 100px;
-    font-size: 20px;
-    color: #312134;
-    text-align: center;
-    text-transform: uppercase;
-    letter-spacing: 3px;
-    font-family: 'Arial Black', sans-serif;
-    text-shadow: none;
-    position: relative;
-    font-style: italic;
-}
-.color-button {
-    width: 100px; /* Ширина кнопки */
-    height: 100px; /* Высота кнопки */
-    margin: 10px; /* Отступы между кнопками */
-    border: none; /* Убираем рамку */
-    cursor: pointer; /* Курсор при наведении */
-    transition: transform 0.2s, opacity 0.2s; /* Плавный переход */
+#nextLevelBtn:hover {
+    background-color: #0b8043;
 }
 
-.color-button.active {
-    opacity: 0.7; /* Уменьшаем непрозрачность */
-    transform: scale(1.1); /* Увеличиваем кнопку */
+.highlight {
+    opacity: 0.7;
+    filter: brightness(1.5);
 }
 
-#buttonContainer {
-    display: grid; /* Используем grid для расположения кнопок */
-    grid-template-columns: repeat(4, 1fr); /* 4 колонки */
-    gap: 10px; /* Промежуток между кнопками */
-    padding: 20px; /* Отступы внутри контейнера */
-    
-}
-
-.color-button {
-    width: 100px; /* Ширина кнопки */
-    height: 100px; /* Высота кнопки */
-    border: none; /* Убираем рамку */
-    cursor: pointer; /* Курсор при наведении */
-    transition: transform 0.2s, opacity 0.2s; /* Плавный переход */
-    border: 5px solid #312134;
-    border-radius: 100px;
-}
-
-.color-button.active {
-    opacity: 0.7; /* Уменьшаем непрозрачность */
-    transform: scale(1.1); /* Увеличиваем кнопку */
+.disabled-btn {
+    pointer-events: none;
+    opacity: 0.7;
 }
